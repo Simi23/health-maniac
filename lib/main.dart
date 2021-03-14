@@ -101,8 +101,24 @@ class HomePage extends StatelessWidget {
                           child: Padding(
                               padding: EdgeInsets.fromLTRB(40, 15, 40, 15),
                               child: Text(
-                                "Játék",
+                                "Indítás",
                                 style: TextStyle(fontSize: 40),
+                              ))),
+                    ),
+                    ButtonTheme(
+                      height: 200,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.red[800])),
+                          onPressed: () {
+                            makeInfoDialog(context);
+                          },
+                          child: Padding(
+                              padding: EdgeInsets.all(8),
+                              child: Text(
+                                "Információ",
+                                style: TextStyle(fontSize: 18),
                               ))),
                     ),
                     ButtonTheme(
@@ -136,6 +152,30 @@ class HomePage extends StatelessWidget {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       content: Text("Ezt az applikációt a Carrot Power csapata készítette."),
+      actions: [
+        homeButton
+      ],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  void makeInfoDialog(BuildContext context) {
+    Widget homeButton = FlatButton(
+      child: Text("Ok"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Text("Az indítás gomb megnyomásával véletlenszerűen a következő három játék egyike indul el:\n - Memóriakártya\n - Puzzle\n - Tili-toli"),
       actions: [
         homeButton
       ],
